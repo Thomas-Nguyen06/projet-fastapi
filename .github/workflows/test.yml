@@ -13,10 +13,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
       - name: Install
         run: |
-          apt-get install -y pip &&\
-          pip install --upgrade pip && pip install --upgrade -r /.docker/requirements.txt
+          pip install --upgrade pip && pip install --upgrade -r .docker/requirements.txt &&\
+          pip install pytest
       - name: Tests
         run: |
           pytest
