@@ -9,10 +9,14 @@ on:
 
 jobs:
   tests:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        id: checkout
         uses: actions/checkout@v2
+      - name: Install
+        run: |
+          apt-get install -y pip &&\
+          pip install --upgrade pip && pip install --upgrade -r /.docker/requirements.txt
       - name: Tests
         run: |
           pytest
